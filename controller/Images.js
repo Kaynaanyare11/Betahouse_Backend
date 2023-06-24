@@ -1,34 +1,42 @@
 
 const {ImagesModel,ImagesValidate} = require('../Models/ImagesSchema');
+const HttpError = require('../Models/http-error');
 const mongoose = require('mongoose');
-const getImages = async (req, res) => {
+const getImages = async (req, res,next) => {
     let Images;
     try {
       Images = await ImagesModel.find();
     } catch (err) {
-        return res.send(err.message);
- 
+      const error = new HttpError(
+        'Fetching Images Failed.'
+      );
+      return next(error);
     }
-    res.json({ Images: Images.map(Images => Images.toObject({ getters: true })) });
+  
+    res.status(200).json({ Images: Images.map(Images => Images.toObject({ getters: true })) });
   };
-const getImagesById = async (req, res) => {
+const getImagesById = async (req, res,next) => {
   const ImagesId = req.params._id; // { pid: 'p1' }
   let Images
   try {
     Images = await ImagesModel.findById(ImagesId).exec();
   } catch (err) {
-    return res.send(err.message);
+    const error = new HttpError(
+      'Fetching image Failed.'
+    );
+    return next(error);
   }
+
 
 
   if (!Images) {
-    return res.send("Images Not Found");
+    return res.status(404).send("Images Not Found");
   }
 
-  res.json({ Images: Images.toObject({ getters: true }) }); // => { place } => { place: place }
+  res.status(200).json({ Images: Images.toObject({ getters: true }) }); // => { place } => { place: place }
 };
 
-const createImages = async (req, res) => {
+const createImages = async (req, res,next) => {
     try {
         let { error } = ImagesValidate(req.body);
         if (error) return res.send(error.message)
@@ -40,13 +48,33 @@ const createImages = async (req, res) => {
         });
         await Images.save();
     
-      } catch (error) {
-        res.send({status:"Error",message:error.message});
-    
+      } catch (err) {
+        const error = new HttpError(
+          'Creating New Image Failed.'
+        );
+        return next(error);
       }
+    
 };
+const PutImages = async (req,res,next)=>{
+  try {
+      let Images= await ImagesModel.findByIdAndUpdate(req.params.id,req.body,{new:true});
+
+     res.status(200).send({
+      status:'Success',
+      message:"Successfully Updated",
+      info: Images
+    });
+  } catch (err) {
+      const error = new HttpError(
+        'Updating Images Failed.'
+      );
+      return next(error);
+    }
+  }
 exports.getImagesById = getImagesById;
 exports.createImages = createImages;
 exports.getImages = getImages;
+exports.PutImages = PutImages;
 
 

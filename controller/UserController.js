@@ -7,16 +7,15 @@ const getUsers = async (req, res, next) => {
       users = await UserModel.find({}, '-password');
     } catch (err) {
       const error = new HttpError(
-        'Fetching users failed, please try again later.',
-        500
+        'Fetching users failed, please try again later.'
       );
       return next(error);
     }
-    res.json({ users: users.map(user => user.toObject({ getters: true })) });
+    res.status(200).json({ users: users.map(user => user.toObject({ getters: true })) });
   };
 
 
-  const signup = async (req, res) => {    
+  const signup = async (req, res,next) => {    
     const password= req.body.password;
     // let existingUser;
     // try {
@@ -47,8 +46,12 @@ const getUsers = async (req, res, next) => {
     try {
       await createdUser.save();
     } catch (err) {
-      return res.send(err.message);
+      const error = new HttpError(
+        'Creating New User Failed.'
+      );
+      return next(error);
     }
+  
     res
       .status(201)
       .send(createdUser);
