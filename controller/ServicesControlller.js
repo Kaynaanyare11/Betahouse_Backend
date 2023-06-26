@@ -1,5 +1,5 @@
 
-const {ServiseModel,ServiseValidate} = require('../Models/ServisesSchema');
+const {ServiseModel,ServiseValidate} = require('../Models/HomePageSetting/ServisesSchema');
 const HttpError = require('../Models/http-error');
 const mongoose = require('mongoose');
 const getService = async (req, res,next) => {

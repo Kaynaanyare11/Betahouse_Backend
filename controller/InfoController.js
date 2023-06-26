@@ -1,5 +1,5 @@
 
-const {InfoModel,InfoValidate} = require('../Models/OurInfoSchema');
+const {InfoModel,InfoValidate} = require('../Models/HomePageSetting/StaticPartsHomePageSchema');
 const HttpError = require('../Models/http-error');
 const mongoose = require('mongoose');
 //Get All Info

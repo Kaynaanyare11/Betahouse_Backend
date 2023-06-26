@@ -1,5 +1,5 @@
 
-const {ClientModel,ClientValidate} = require('../Models/ClientSchema');
+const {ClientModel,ClientValidate} = require('../Models/HomePageSetting/ClientSchema');
 const HttpError = require('../Models/http-error');
 const mongoose = require('mongoose');
 const getClient = async (req, res) => {

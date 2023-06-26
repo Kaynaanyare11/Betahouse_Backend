@@ -1,5 +1,5 @@
 
-const {StaticModel} = require('../Models/StaticPartsHomePageSchema');
+const {StaticModel} = require('../Models//HomePageSetting/StaticPartsHomePageSchema');
 const HttpError = require('../Models/http-error');
 const mongoose = require('mongoose');
 const getStatic = async (req, res,next) => {

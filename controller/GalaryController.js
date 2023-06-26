@@ -1,5 +1,5 @@
 
-const {GalaryModel,GalaryValidate} = require('../Models/GalarySchema');
+const {GalaryModel,GalaryValidate} = require('../Models/HomePageSetting/GalarySchema');
 const HttpError = require('../Models/http-error');
 const mongoose = require('mongoose');
 const getGalary = async (req, res) => {

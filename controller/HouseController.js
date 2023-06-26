@@ -1,5 +1,5 @@
 
-const {HouseModel,HouseValidate} = require('../Models/HomeSchema');
+const {HouseModel,HouseValidate} = require('../Models/HouseSchema');
 const HttpError = require('../Models/http-error');
 const mongoose = require('mongoose');
 //Get All Houses
