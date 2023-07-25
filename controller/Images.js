@@ -44,10 +44,11 @@ const createImages = async (req, res, next) => {
     })
     await Images.save()
   } catch (err) {
-    const error = new HttpError(
-      'Creating New Image Failed.'
-    )
-    return next(error)
+    // const error = new HttpError(
+    //   'Creating New Image Failed.'
+    // )
+    // return next(error)
+    console.log(err.message)
   }
 }
 const PutImages = async (req, res, next) => {
