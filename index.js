@@ -21,7 +21,9 @@ mongoose.connect(process.env.DB_URL).then(() => {
   console.log(err)
 }
 )
-
+app.get('/',()=> {
+  res.json("hi")
+  })
 app.use('/houses', housesRouter)
 app.use('/users', usersRouter)
 app.use('/images', ImagesRouter)
