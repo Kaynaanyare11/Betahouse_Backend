@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const app = require('../../app')
+const app = require('../..')
 const request = require('supertest')
 
 describe('Waxaan tijaabinaa getka post', () => {
