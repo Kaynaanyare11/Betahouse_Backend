@@ -24,7 +24,7 @@ mongoose.connect(process.env.DB_URL).then(() => {
 
 app.use('/houses', housesRouter)
 app.use('/users', usersRouter)
-app.use('/images', ImagesRouter)
+app.use('api/images', ImagesRouter)
 app.use('/info', InfoRouter)
 app.use('/galary', GalaryRouter)
 app.use('/client', ClientRouter)
