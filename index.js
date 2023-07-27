@@ -13,7 +13,7 @@ const cors = require('cors')
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({Origin: 'http://localhost:5173'}))
 mongoose.set('strictQuery', false)
 mongoose.connect(process.env.DB_URL).then(() => {
   console.log('Connected!')
