@@ -1,18 +1,18 @@
 const { ImagesModel, ImagesValidate } = require('../Models/ImagesSchema')
 const HttpError = require('../Models/http-error')
 const getImages = async (req, res, next) => {
-  res.json("Hello")
-  // let Images
-  // try {
-  //   Images = await ImagesModel.find()
-  // } catch (err) {
-  //   const error = new HttpError(
-  //     'Fetching Images Failed.'
-  //   )
-  //   return next(error)
-  // }
 
-  // res.status(200).json({ Images: Images.map(Images => Images.toObject({ getters: true })) })
+  let Images
+  try {
+    Images = await ImagesModel.find()
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching Images Failed.'
+    )
+    return next(error)
+  }
+
+  res.status(200).json({ Images: Images.map(Images => Images.toObject({ getters: true })) })
 }
 const getImagesById = async (req, res, next) => {
   const ImagesId = req.params._id // { pid: 'p1' }
